@@ -66,3 +66,26 @@ cv2.imshow("matplot",skeleton)
 cv2.waitKey(0)
 cv2.imwrite("skeleton.jpg", skeleton)
 '''
+
+# Smoothing images
+# In many image processing, we need to reduce the high frequency noise,
+# making it easier for our algorithm to understand the contents rather 
+# than the noise which will confuse the algorithm. Blurring an image is
+# one of the easiest way of doing so!
+'''
+blurred = cv2.GaussianBlur(image, (11,11), 10,0,10)
+cv2.imshow("blurred", blurred)
+cv2.waitKey(0)
+cv2.imwrite("blurred uj.jpg", blurred)
+'''
+
+# Drawing on an image
+# Note when drawing on an image, we are drawing in place
+# Hence, it is a good practice to create a copy (image.copy())
+# when drawing so we do not destroy the original image
+
+output = image.copy()
+cv2.rectangle(output, (140,90), (280,280),(0,0,255), 5)
+cv2.imshow("output rectangle", output)
+cv2.waitKey(0)
+cv2.imwrite("uj_rectangle.jpg", output)
