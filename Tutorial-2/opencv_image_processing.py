@@ -100,7 +100,7 @@ cv2.imwrite("./images/uj_circle.jpg", output)
 '''
 
 output = image.copy()
-cv2.putText(output, "Yoo Je Hoang, Data Scientist", (10,30),cv2.FONT_HERSHEY_SIMPLEX, 0.55, (255,255,255),1)
+cv2.putText(output, "ujhoang, Data Scientist", (10,30),cv2.FONT_HERSHEY_SIMPLEX, 0.55, (255,255,255),1)
 cv2.imshow("uj with text", output)
 cv2.waitKey(0)
 cv2.imwrite("./images/uj_text.jpg", output)
