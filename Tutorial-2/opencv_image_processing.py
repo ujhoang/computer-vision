@@ -19,8 +19,19 @@ print("{} saved".format(name))
 (B, G, R) = image[100, 50]
 print("B={}, G={}, R={}".format(B, G, R))
 
+#Array slicing and cropping
 #extract region of interest starting from (320,60) to (420,160)
 roi = image[80:270, 130:280]
 cv2.imshow("Region of Interest Dr", roi)
 cv2.waitKey(0)
 cv2.imwrite("cropped.jpg", roi)
+
+#Resizing images
+#In deep learning we resize images, ignoring aspect ratios, 
+#so that the volume fits into a network which requires
+#the image to be square and to be of certain dimesion
+
+resize = cv2.resize(image, (200,200))
+cv2.imshow("resized photo", resize)
+cv2.waitKey(0)
+cv2.imwrite("resized.jpg", resize)
