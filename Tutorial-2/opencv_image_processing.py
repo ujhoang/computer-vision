@@ -19,3 +19,8 @@ print("{} saved".format(name))
 (B, G, R) = image[100, 50]
 print("B={}, G={}, R={}".format(B, G, R))
 
+#extract region of interest starting from (320,60) to (420,160)
+roi = image[80:270, 130:280]
+cv2.imshow("Region of Interest Dr", roi)
+cv2.waitKey(0)
+cv2.imwrite("cropped.jpg", roi)
