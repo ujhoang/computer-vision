@@ -11,10 +11,6 @@ print("width={}, height={}, dimension={}".format(w,h,d))
 cv2.imshow("Image", image)
 cv2.waitKey(0)
 
-# saving the image after processing it
-cv2.imwrite(name, image)
-print("{} saved".format(name))
-
 # access the (B, G, R) pixel in x=50 and y=100
 (B, G, R) = image[100, 50]
 print("B={}, G={}, R={}".format(B, G, R))
