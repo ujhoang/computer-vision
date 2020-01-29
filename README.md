@@ -10,4 +10,6 @@ then later develop my own neural network to run object and facial detection mode
 
 ![alt text](https://github.com/ujhoang/computer-vision/blob/master/2.%20Image%20processing/images/contours.jpg)
 
+![alt text](https://github.com/ujhoang/computer-vision/blob/master/2.%20Image%20processing/images/erosion.jpg)
+
 ![alt text](https://github.com/ujhoang/computer-vision/blob/master/2.%20Image%20processing/images/Masked%20Tetris.jpg)
