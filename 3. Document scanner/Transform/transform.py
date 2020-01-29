@@ -28,8 +28,8 @@ def four_points_transform(image, pts):
 
     # calculating the width of the rect will be the max of difference between
     # (tl and tr) or (bl and br) in x coordinates
-    widthA = np.sqrt(((tr[0] - tl[0])**2) + ((tr[1] - tl[1])**2))
     widthB = np.sqrt(((br[0] - bl[0])**2) + ((br[1] - bl[1])**2))
+    widthA = np.sqrt(((tr[0] - tl[0])**2) + ((tr[1] - tl[1])**2))
     MaxWidth = max(int(widthA), int(widthB))
 
     # calculating the width of the rect will be the max of difference between
@@ -41,13 +41,15 @@ def four_points_transform(image, pts):
     # dimension of the image is (MaxWidth, MaxHeight)
     # with the dimension of the top-eye view, construct the destination coordinates
     # Keeping the order of tl, tr, br, bl
-    dst = np.array([[0,0],
-                    [MaxWidth-1, 0],
-                    [MaxWidth-1, MaxHeight-1],
-                    [0, MaxHeight-1]], dtype="float32")
+    dst = np.array([
+        [0,0],
+        [MaxWidth-1, 0],
+        [MaxWidth-1, MaxHeight-1],
+        [0, MaxHeight-1]], dtype="float32")
 
     # Compute the perspective transform matrix then apply it to the coordinates
-    M = cv2.perspectiveTransform(rect, dst)
+    M = cv2.getPerspectiveTransform(rect, dst)
     warped = cv2.warpPerspective(image, M, (MaxWidth, MaxHeight))
+
     return warped
 
