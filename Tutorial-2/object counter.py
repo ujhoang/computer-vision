@@ -72,4 +72,8 @@ cv2.imshow("Dilated tetris", mask)
 cv2.waitKey(0)
 cv2.imwrite("./images/Dilation.jpg", mask)
 
-# I can bitwise and 
+# I can blackout the background that I don't care about and keep the coloured objects in the foreground
+mask = thresh.copy()
+mask = cv2.bitwise_and(image, image, mask=mask)
+cv2.imshow("masked image", mask)
+cv2.waitKey(0)
