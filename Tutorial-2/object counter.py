@@ -55,3 +55,21 @@ cv2.putText(output, text, (20,30), cv2.FONT_HERSHEY_PLAIN, 2, (50,100,100), 1)
 cv2.imshow("Contours", output)
 cv2.waitKey()
 cv2.imwrite("./images/contours.jpg", output)
+
+# 5. Erosion and Dilation
+# This technique is used to reduce noise in binary images, side effect of thresholding.
+# To reduce the size of foreground objects we can erode away pixels given a number of iterations.
+mask = thresh.copy()
+mask = cv2.erode(mask, None, iterations=5)
+cv2.imshow("Eroded tetris", mask)
+cv2.waitKey(0)
+cv2.imwrite("./images/erosion.jpg", mask)
+
+# Similarly, I can dilate to increase the size of the objects.
+mask = thresh.copy()
+mask = cv2.dilate(mask, None, iterations = 5)
+cv2.imshow("Dilated tetris", mask)
+cv2.waitKey(0)
+cv2.imwrite("./images/Dilation.jpg", mask)
+
+# I can bitwise and 
