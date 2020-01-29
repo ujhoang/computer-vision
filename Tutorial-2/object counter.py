@@ -36,7 +36,7 @@ cv2.imwrite("./images/edge tetris.jpg", edge)
 # By thresholding the pixels <225 to 255 (White) - FOREGROUND
 # and pixels >=225 to 0 (Black), this segments the image - BACKGROUND
 # cv2.threshold[1] an array of pixel greyscale codes that would be used to create the edge detected image
-thresh = cv2.threshold(grey, 225, 255, cv2.THRESH_BINARY)[1]
+thresh = cv2.threshold(grey, 225, 255, cv2.THRESH_BINARY_INV)[1]
 cv2.imshow("Thresh", thresh)
 cv2.waitKey(0)
 cv2.imwrite("./images/black_white.jpg", thresh)
@@ -44,5 +44,14 @@ cv2.imwrite("./images/black_white.jpg", thresh)
 # 4. Finding, Counting and Drawing Contour
 # Separating the background from the foreground is critical to image processing
 contours = cv2.findContours(thresh.copy(), cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
-cv2.imshow("Contours", contours)
-cv2.waitKey(0)
+cnts = imutils.grab_contours(contours)
+output = image.copy()
+
+for i in cnts:
+    cv2.drawContours(output, [i], -1, (0, 0, 255), 2)
+
+text = "Model has found {} objects".format(len(cnts))
+cv2.putText(output, text, (20,30), cv2.FONT_HERSHEY_PLAIN, 2, (50,100,100), 1)
+cv2.imshow("Contours", output)
+cv2.waitKey()
+cv2.imwrite("./images/contours.jpg", output)
