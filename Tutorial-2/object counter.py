@@ -23,10 +23,12 @@ cv2.waitKey(0)
 grey = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 cv2.imshow("grey", grey)
 cv2.waitKey(0)
+cv2.imwrite("./images/grey tetris.jpg", grey)
 
 # 2. Edge Detection
 edge = cv2.Canny(image, 30, 150)
 cv2.imshow("edged", edge)
 cv2.waitKey(0)
+cv2.imwrite("./images/edge tetris.jpg", edge)
 
 # 3. Thresholding
