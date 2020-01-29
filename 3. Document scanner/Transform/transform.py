@@ -9,15 +9,16 @@ def order_points(pts):
 
     #top left coordinates will have the smallest sum
     #bottom right will have the largest
-    s = np.sum(pts ,axis=1)
+    s = pts.sum(axis=1)
     rect[0] = pts[np.argmin(s)]
     rect[2] = pts[np.argmax(s)]
 
     #top right will have the largest (y - x) diff
     #bottom left will have the smallest (y - x) diff
     diff = np.diff(pts, axis = 1)
-    rect[1] = pts[np.argmax(diff)]
-    rect[3 ]= pts[np.argmin(diff)]
+    rect[1] = pts[np.argmin(diff)]
+    rect[3]= pts[np.argmax(diff)]
+
     return rect
 
 def four_points_transform(image, pts):
@@ -41,9 +42,9 @@ def four_points_transform(image, pts):
     # with the dimension of the top-eye view, construct the destination coordinates
     # Keeping the order of tl, tr, br, bl
     dst = np.array([[0,0],
-                    [0, MaxWidth-1],
-                    [MaxHeight-1, MaxWidth-1],
-                    [MaxHeight-1, 0]], dtype="float32")
+                    [MaxWidth-1, 0],
+                    [MaxWidth-1, MaxHeight-1],
+                    [0, MaxHeight-1]], dtype="float32")
 
     # Compute the perspective transform matrix then apply it to the coordinates
     M = cv2.perspectiveTransform(rect, dst)
