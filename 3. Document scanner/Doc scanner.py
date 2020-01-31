@@ -8,15 +8,14 @@ ap.add_argument("-i", "--image", required=True, help= "Path to the image")
 args = vars(ap.parse_args())
 
 # Document scanner will be 3 step process
-# 1. Detect edges
-# 2. Use the edges to find the contour 
+# 1. Detect edges - with Canny model
+# 2. Use the edges to find the contour -  find_contour(image, mode, method)
 # 3. Use perspective transform to obtain top down view
 
 image = cv2.imread(args["image"])
 ratio = image.shape[0] /500.0
 orig = image.copy()
 image = imutils.resize(image, height=500)
-
 
 grey = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 grey = cv2.GaussianBlur(grey, (5,5), 0)
@@ -41,6 +40,7 @@ for c in cnts:
     if len(approx) ==4:
         screenCnt = approx
         break
+
 # Showing the contour
 print("Step 2: Find contours of the paper")
 cv2.drawContours(image, [screenCnt], -1, (0,255,0), 2)
@@ -53,10 +53,12 @@ cv2.destroyAllWindows()
 #apply the four point transform to see the top down view of the imiage
 warped = four_points_transform(orig, screenCnt.reshape(4,2)*ratio)
 
+
 #convert the warped image to greyscale, to threshold it to give the black and white effect
 warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
 T = threshold_local(warped, 11, offset = 10, method = "gaussian")
 warped = (warped > T).astype("uint8") * 255
+
 
 # Show the original and scanned images
 print("STEP 3: Apply perspective transform")
