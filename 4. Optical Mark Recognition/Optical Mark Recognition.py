@@ -116,3 +116,4 @@ cv2.putText(paper, "{:.2f}%".format(score), (10, 30),
 cv2.imshow("Original", image)
 cv2.imshow("Exam", paper)
 cv2.waitKey(0)
+cv2.imwrite("Result.jpg", paper)
